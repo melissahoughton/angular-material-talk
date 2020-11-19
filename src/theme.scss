@@ -1,0 +1,135 @@
+@import '~@angular/material/theming';
+
+/*
+ * The best way to see what can be defined in a theme is by looking at the source:
+ *  https://github.com/angular/components/tree/master/src/material/core/theming
+ */
+
+@include mat-core(); // applies base styles
+
+/*
+ * --- COLORS ---
+ * Colors are defined using a palette to allow for hover states, ripple effects and more
+ * Angular Material defined palettes to use and the background/foreground defaults are here:
+ *   https://github.com/angular/components/blob/master/src/material/core/theming/_palette.scss
+ * Or use tool to define your own: https://material.io/resources/color
+ */
+$my-app-primary: mat-palette($mat-deep-purple);
+$my-app-accent: mat-palette($mat-cyan);
+
+$my-app-warn: mat-palette($mat-red);
+
+// Single colors can be used for other customisations
+$my-dark-blue: #180c4b;
+$my-darker-blue: #08041b;
+
+// Background palette for dark themes
+$mat-dark-theme-background: (status-bar: black,
+  app-bar: $my-dark-blue,
+  background: $my-darker-blue,
+  hover: rgba(white, 0.04),
+  card: $my-dark-blue,
+  dialog: map_get($mat-grey, 800),
+  disabled-button: rgba(white, 0.12),
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $light-focused,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
+  tooltip: green,
+);
+
+// Foreground palette for dark themes.
+$mat-dark-theme-foreground: (base: white,
+  divider: $light-dividers,
+  dividers: $light-dividers,
+  disabled: $light-disabled-text,
+  disabled-button: rgba(white, 0.3),
+  disabled-text: $light-disabled-text,
+  elevation: black,
+  hint-text: $light-disabled-text,
+  secondary-text: $light-secondary-text,
+  icon: white,
+  icons: white,
+  text: white,
+  slider-min: white,
+  slider-off: rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);
+
+
+/*
+ * --- MAIN THEME ---
+ * Overall theme for all components: https://github.com/angular/components/blob/master/src/material/core/theming/_all-theme.scss
+ * Override theme for a specific component using: @include mat-COMPONENT-theme($theme);
+ */
+$my-app-theme: mat-dark-theme((color:(primary: $my-app-primary,
+      accent: $my-app-accent,
+      warning: $my-app-warn)));
+
+@include angular-material-theme($my-app-theme); // applies custom theme overall
+
+/*
+ * --- TYPOGRAPHY ---
+ *
+ * Define custom typography by defining a config.
+ * This is the default typography definition in material. Not all definitions are required to be customised
+ *
+  mat-typography-config(
+    $font-family:   'Roboto, "Helvetica Neue", sans-serif',
+    $display-4:     mat-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+    $display-3:     mat-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+    $display-2:     mat-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+    $display-1:     mat-typography-level(34px, 40px, 400),
+    $headline:      mat-typography-level(24px, 32px, 400),
+    $title:         mat-typography-level(20px, 32px, 500),
+    $subheading-2:  mat-typography-level(16px, 28px, 400),
+    $subheading-1:  mat-typography-level(15px, 24px, 400),
+    $body-2:        mat-typography-level(14px, 24px, 500),
+    $body-1:        mat-typography-level(14px, 20px, 400),
+    $caption:       mat-typography-level(12px, 20px, 400),
+    $button:        mat-typography-level(14px, 14px, 500),
+    // Line-height must be unit-less fraction of the font-size.
+    $input:         mat-typography-level(inherit, 1.125, 400)
+  );
+ *
+ * mat-typography-level has the following parameters and defaults:
+    $font-size,
+    $line-height: $font-size,
+    $font-weight: 400,
+    $font-family: null,
+    $letter-spacing: null
+ *
+*/
+
+$my-custom-typography: mat-typography-config($font-family: 'Roboto, "Helvetica Neue", sans-serif',
+  $display-4: mat-typography-level(120px, 120px, 800, 'Kanit, sans-serif', $letter-spacing: -0.05em),
+  $display-3: mat-typography-level(60px, 60px, 800, 'Kanit, sans-serif', $letter-spacing: -0.02em),
+  $display-2: mat-typography-level(48px, 50px, 800, 'Kanit, sans-serif', $letter-spacing: -0.005em),
+  $display-1: mat-typography-level(40px, 48px, 800, 'Kanit, sans-serif'),
+  $headline: mat-typography-level(28px, 32px, 800, 'Kanit, sans-serif'),
+  $title: mat-typography-level(20px, 32px, 500),
+  $subheading-2: mat-typography-level(16px, 28px, 400),
+  $subheading-1: mat-typography-level(15px, 24px, 400),
+  $body-2: mat-typography-level(16px, 28px, 500),
+  $body-1: mat-typography-level(16px, 24px, 400),
+  $caption: mat-typography-level(12px, 20px, 400),
+  $button: mat-typography-level(16px, 16px, 500),
+  // Line-height must be unit-less fraction of the font-size.
+  $input: mat-typography-level(inherit, 1.125, 400));
+
+@include angular-material-typography($my-custom-typography);
+
+
+// Components each have their own typography overrides as well
+// mat-card-typography only uses headline, title and body-1
+// https://github.com/angular/components/blob/master/src/material/card/_card-theme.scss#L27
+$my-custom-card-typography: mat-typography-config($font-family: 'Roboto, "Helvetica Neue", sans-serif',
+  $headline: mat-typography-level(48px, 52px, 800),
+  $title: mat-typography-level(32px, 36px, 500),
+  $body-1: mat-typography-level(16px, 24px, 400),
+);
+
+@include mat-card-typography($my-custom-card-typography)
